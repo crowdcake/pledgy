@@ -1,0 +1,27 @@
+{
+  "name": "pledgy",
+  "version": "0.0.1",
+  "description": "An internal Project-Pledge System",
+  "main": "bin/www",
+  "scripts": {
+    "test": "bin/www debug"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h42i/Pledgy.git"
+  },
+  "keywords": [
+    "project",
+    "pledge",
+    "system",
+    "internal",
+    "express-app"
+  ],
+  "author": "lschuermann and monographic",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/h42i/Pledgy/issues"
+  },
+  "homepage": "https://github.com/h42i/Pledgy#readme",
+  "private": true
+}
