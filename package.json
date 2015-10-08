@@ -1,7 +1,10 @@
 {
-  "name": "Pledgy",
-  "version": "0.0.0",
   "private": true,
+  "name": "Pledgy",
+  "version": "0.0.1",
+  "description": "An internal system for crowdfunding projects",
+  "author": "lschuermann and Eddy Shure",
+  "main": "bin/www",
   "scripts": {
     "start": "node ./bin/www"
   },
@@ -12,6 +15,23 @@
     "express": "~4.13.1",
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
-  }
+    "serve-favicon": "~2.3.0",
+    "rethinkdb": "^2.1.1"
+},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/h42i/Pledgy.git"
+  },
+  "keywords": [
+    "project",
+    "pledge",
+    "system",
+    "internal",
+    "express-app"
+  ],
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/h42i/Pledgy/issues"
+  },
+  "homepage": "https://github.com/h42i/Pledgy#readme",
 }
