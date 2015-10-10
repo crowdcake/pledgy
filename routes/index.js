@@ -7,19 +7,29 @@ var express = require('express'),
 var router = express.Router();
     project_hashids = new hashids(config.hashids_salt);
 
-/* Overview-Page */
 router.get('/', function(req, res, next) {
+  res.status(200).redirect('/project');
+});
+
+/* Overview-Page */
+router.get('/project', function(req, res, next) {
   db.getAllProjects(function(result) {
     res.render('index', {
-          title: 'Pledgy',
-          projects: result
-        });
-
-      });
+      title: 'Pledgy',
+      projects: result
     });
 
+  });
+});
+
 /* Project-Page */
-router.get('/project/:project_uid', function(req, res, next) {
+router.get('/project/:id', function(req, res, next) {
+  db.getProjectByID(req.params.id, function(result) {
+    res.render('project', {
+      title: 'Pledgy',
+      project: result
+    });
+  });
 });
 
 module.exports = router;

@@ -5,5 +5,5 @@ block content
   h2 Projects:
   
   each project in projects
-    h3 #{project.name}
+    a(href='/project/#{project.id}') #{project.name}
     p #{project.description}
