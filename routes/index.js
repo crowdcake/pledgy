@@ -1,4 +1,5 @@
-var config = require('../config.json');
+var config = require('../config.json'),
+    db     = require('../lib/db');
 
 var express = require('express'),
     hashids = require('hashids');
@@ -8,15 +9,14 @@ var router = express.Router();
 
 /* Overview-Page */
 router.get('/', function(req, res, next) {
-    var projects = [{
-        title: "Pledgy",
-        desc: "Pure awesomeness."
-    }];
+  db.getAllProjects(function(result) {
     res.render('index', {
-        title: 'Pledgy',
-        projects: projects
+          title: 'Pledgy',
+          projects: result
+        });
+
+      });
     });
-});
 
 /* Project-Page */
 router.get('/project/:project_uid', function(req, res, next) {
