@@ -1,7 +1,11 @@
 doctype html
 html
   head
-    title= title
-    link(rel='stylesheet', href='/stylesheets/style.css')
+    block title
+      title pledgy
+    link(rel='stylesheet', href='/stylesheets/app.css')
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
   body
+    include navbar.jade
     block content
+      script(type="text/javascript", src="/javascripts/app.js")

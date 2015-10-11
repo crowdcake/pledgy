@@ -1,35 +1,28 @@
 var config = require('../config.json'),
     db     = require('../lib/db');
 
-var express = require('express'),
-    hashids = require('hashids');
-
+var express = require('express');
 var router = express.Router();
-    project_hashids = new hashids(config.hashids_salt);
 
 router.get('/', function(req, res, next) {
-  res.status(200).redirect('/project');
+  res.redirect('/projects');
 });
 
-/* Overview-Page */
-router.get('/project', function(req, res, next) {
+router.get('/projects', function(req, res, next) {
   db.getAllProjects(function(result) {
-    res.render('index', {
-      title: 'Pledgy',
-      projects: result
-    });
-
+    res.render('index', {projects: result});
   });
 });
 
-/* Project-Page */
+router.get('/projects/new', function(req, res, next) {
+  res.render('new');
+});
+
 router.get('/project/:id', function(req, res, next) {
   db.getProjectByID(req.params.id, function(result) {
-    res.render('project', {
-      title: 'Pledgy',
-      project: result
-    });
+    res.render('show', {project: result});
   });
 });
+
 
 module.exports = router;

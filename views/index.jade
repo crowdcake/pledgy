@@ -1,9 +1,19 @@
 extends layout
 
+block title
+  title Overview - pledgy
+
 block content
-  h1= title
-  h2 Projects:
-  
-  each project in projects
-    a(href='/project/#{project.id}') #{project.name}
-    p #{project.description}
+  link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
+  div.container
+    h3 Projects
+    div.divider
+    each project in projects
+      div.section
+        h5
+          a(href='/project/#{project.id}') #{project.name}
+        p #{project.description}
+      div.divider
+  div.fixed-action-btn(style="bottom: 24px; right: 24px;")
+    a.btn-floating.btn-large.waves-effect.waves-light.red(href="/projects/new")
+      i.material-icons add

@@ -1,0 +1,15 @@
+extends layout
+
+block content
+  div.container
+    h2 Create new project
+    div.divider
+    div.row
+      div.input-field.col.s12
+        textarea.materialize-textarea(id="description")
+        label(for="description") Project description
+
+    div.row
+      div.input-field.col.s6
+        input(value="Alvin", id="firstname", type="text").validate
+        label.active(for="firstname") First Name

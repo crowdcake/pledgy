@@ -34,5 +34,10 @@
   "bugs": {
     "url": "https://github.com/h42i/Pledgy/issues"
   },
-  "homepage": "https://github.com/h42i/Pledgy#readme"
+  "homepage": "https://github.com/h42i/Pledgy#readme",
+  "devDependencies": {
+    "brunch": "^1.8.5",
+    "javascript-brunch": "^1.7.1",
+    "sass-brunch": "^1.9.1"
+  }
 }

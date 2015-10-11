@@ -1,7 +1,10 @@
 extends layout
 
-block content
-  h1= title
-  h2 Projects:
+block title
+  title #{project.name} by #{project.owner} - pledgy
 
-  h3= project.name
+block content
+  div.container
+    h3= project.name
+    div.divider
+    p= project.description
