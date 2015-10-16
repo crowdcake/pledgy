@@ -1,6 +1,37 @@
+@import "bower_components/Materialize/sass/components/color";
+
+$primary-color: color("blue", "lighten-1");
+
 @import 'bower_components/Materialize/sass/materialize';
-@import url(https://fonts.googleapis.com/css?family=Lobster);
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Lobster+Two:700);
+
+.fancy-floating-button {
+  bottom: 4vh;
+  right: 4vh;
+}
 
 .brand-logo {
-  font-family: 'Lobster', cursive;
+  font-family: 'Lobster Two', cursive;
+}
+
+.pledge-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .pledge {
+    font-size: 4em;
+  }
+}
+.money-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .money {
+    font-size: 4em;
+  }
+}
+
+.content-title {
+  font-family: 'Lato', sans-serif;
 }

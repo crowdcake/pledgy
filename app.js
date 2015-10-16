@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var db = require('./lib/db');
 
 var main_routes = require('./routes/index');
+var api_routes = require('./routes/api');
 
 var app = express();
 
@@ -23,6 +24,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', main_routes);
+app.use('/api', api_routes);
 
 db.setup();
 

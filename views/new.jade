@@ -1,15 +1,36 @@
 extends layout
 
+block title
+  title New project - pledgy
+
 block content
   div.container
-    h2 Create new project
+    h3 Create new project
     div.divider
     div.row
-      div.input-field.col.s12
-        textarea.materialize-textarea(id="description")
-        label(for="description") Project description
-
-    div.row
-      div.input-field.col.s6
-        input(value="Alvin", id="firstname", type="text").validate
-        label.active(for="firstname") First Name
+      form.col.s12(action="/projects", method="POST")#pledgeform
+        div.row
+          div.col.s12.m6.l6.input-field
+            input#project_name(type="text").validate
+            label(for="project_name") Project name
+          div.col.s12.m6.l6.input-field
+            input#project_owner(type="text").validate
+            label(for="project_owner") Your name
+        div.row
+          div.col.s12.m6.l6.input-field
+            input#project_subtitle(type="text", length="42").validate
+            label(for="project_subtitle") Short description
+          div.col.s12.m6.l6.input-field
+            input#project_goal(type="number", min="1").validate
+            label(for="project_goal") Funding goal (in €)
+        div.row
+          div.col.s12.m12.l12
+            input.datepicker#project_deadline(type="date")
+        div.row
+          div.col.s12.m12.l12.input-field
+            textarea.materialize-textarea#project_description
+            label(for="project_description") Project description
+        
+  div.fixed-action-btn.fancy-floating-button
+    a.btn-floating.btn-large.waves-effect.waves-light.red#submit-pledgeform
+      i.material-icons send

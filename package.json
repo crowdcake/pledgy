@@ -1,6 +1,6 @@
 {
   "private": true,
-  "name": "Pledgy",
+  "name": "pledgy",
   "version": "0.0.1",
   "description": "An internal system for crowdfunding projects",
   "author": "lschuermann and Eddy Shure",
@@ -17,7 +17,8 @@
     "jade": "~1.11.0",
     "morgan": "~1.6.1",
     "rethinkdb": "^2.1.1",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "shuffle-array": "^0.1.0"
   },
   "repository": {
     "type": "git",

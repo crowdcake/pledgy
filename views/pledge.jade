@@ -1,0 +1,12 @@
+extends layout
+
+block title
+  title #{project.name} by #{project.owner} - pledgy
+
+block content
+  div.container
+    h3= project.name
+    div.divider
+    div.container.pledge-box
+      div.pledge
+        h3.thin My name is <form> and I want to pledge <form> for #{project.name} by #{project.owner}

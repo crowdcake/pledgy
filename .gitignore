@@ -29,6 +29,7 @@ node_modules
 # Bower deps
 bower_components
 public
+app/components
 
 # -----> MAC OS X <-----
 .DS_Store

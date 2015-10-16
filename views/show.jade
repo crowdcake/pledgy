@@ -7,4 +7,33 @@ block content
   div.container
     h3= project.name
     div.divider
-    p= project.description
+    div.row
+      div.col.s12.m6.l6
+        h5 Project description
+        p= project.description
+      div.col.s12.m6.l6
+        h5 Funding progress
+        div.progress(style="height: 2vh;")
+          div.determinate(style="width: #{(project.current / project.goal) * 100}%")
+        div.card.money-box
+          h1.thin.money #{project.current / 100} € / #{project.goal / 100} €
+    div.divider
+    div.row
+      div.col.s12
+        h5 Backers
+        table.striped
+          thead
+            tr
+              th Name
+              th Date
+              th Amount
+          tbody
+            each pledge in project.pledges
+              tr
+                td= pledge.user
+                td "someday"
+                td #{pledge.amount / 100} €
+    
+  div.fixed-action-btn.fancy-floating-button
+    a.btn-floating.btn-large.waves-effect.waves-light.red(href="/project/#{project.id}/pledge")
+      i.material-icons star

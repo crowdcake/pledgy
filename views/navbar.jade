@@ -1,3 +1,14 @@
 nav
   div.nav-wrapper
-    a.brand-logo.center(href="/") pledgy
+    div.container
+      a.brand-logo(href="/") pledgy
+      ul#nav-mobile.right.hide-on-med-and-down
+        li
+          a(href="/archive")
+            i.material-icons history
+        li
+          a(href="/api")
+            i.material-icons code
+        li
+          a(href="/about")
+            i.material-icons info_outline

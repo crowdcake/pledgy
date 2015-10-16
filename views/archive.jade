@@ -1,12 +1,12 @@
 extends layout
 
 block title
-  title Overview - pledgy
+  title Funded projects - pledgy
 
 block content
   link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
   div.container
-    h3 Projects
+    h3 Old projects
     ul.collection
       each project in projects
         a.collection-item(href='/project/#{project.id}') 
