@@ -9,10 +9,10 @@ var App = {
       $('#pledgeform').submit();
     });
 
-    $('#datepicker').pickadate({
-      selectMonths: true,
-      min: new Date()
-    });
+//    $('#datepicker').pickadate({
+//      selectMonths: true,
+//      min: new Date()
+//    });
 
   }
 };

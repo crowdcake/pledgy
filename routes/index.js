@@ -1,4 +1,5 @@
 var db = require('../lib/db');
+var markdown = require('../lib/markdown');
 
 var express = require('express');
 var router = express.Router();
@@ -21,10 +22,10 @@ router.post('/projects', function(req, res, next) {
     subtitle: req.body.project_subtitle,
     goal: parseInt(req.body.project_goal) * 100,
     // deadline: Date.parse(req.body.project_deadline),
-    description: req.body.project_description
+    description: markdown.render(req.body.project_description)
   }
   db.createProject(newProject, function(id) {
-    res.redirect("/projects/" + id);
+    res.redirect("/project/" + id);
   });
 });
 
