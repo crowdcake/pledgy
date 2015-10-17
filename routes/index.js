@@ -19,7 +19,7 @@ router.post('/projects', function(req, res, next) {
     name: req.body.project_name,
     owner: req.body.project_owner,
     subtitle: req.body.project_subtitle,
-    goal: parseInt(req.body.project_goal),
+    goal: parseInt(req.body.project_goal) * 100,
     // deadline: Date.parse(req.body.project_deadline),
     description: req.body.project_description
   }
