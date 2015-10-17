@@ -7,7 +7,7 @@ block content
   link(href="https://fonts.googleapis.com/icon?family=Material+Icons", rel="stylesheet")
   div.container
     h3 Projects
-    ul.collection
+    ul.collection.projects
       each project in projects
         a.collection-item(href='/project/#{project.id}') 
           h5 #{project.name}
@@ -15,5 +15,5 @@ block content
   
   
   div.fixed-action-btn.fancy-floating-button
-    a.btn-floating.btn-large.waves-effect.waves-light.red(href="/projects/new")
+    a.btn-floating.btn-large.waves-effect.waves-light(href="/projects/new")
       i.material-icons add

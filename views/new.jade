@@ -11,26 +11,27 @@ block content
       form.col.s12(action="/projects", method="POST")#pledgeform
         div.row
           div.col.s12.m6.l6.input-field
-            input#project_name(type="text").validate
+            input#project_name(type="text", name="project_name").validate
             label(for="project_name") Project name
           div.col.s12.m6.l6.input-field
-            input#project_owner(type="text").validate
+            input#project_owner(type="text", name="project_owner").validate
             label(for="project_owner") Your name
         div.row
           div.col.s12.m6.l6.input-field
-            input#project_subtitle(type="text", length="42").validate
+            input#project_subtitle(type="text", length="42", name="project_subtitle").validate
             label(for="project_subtitle") Short description
           div.col.s12.m6.l6.input-field
-            input#project_goal(type="number", min="1").validate
+            input#project_goal(type="number", min="1", name="project_goal").validate
             label(for="project_goal") Funding goal (in €)
         div.row
           div.col.s12.m12.l12
-            input.datepicker#project_deadline(type="date")
+            label(for="project_deadline") Funding deadline
+            input.datepicker#project_deadline(type="date", name="project_deadline").validate
         div.row
           div.col.s12.m12.l12.input-field
-            textarea.materialize-textarea#project_description
+            textarea.materialize-textarea#project_description(name="project_description").validate
             label(for="project_description") Project description
         
   div.fixed-action-btn.fancy-floating-button
-    a.btn-floating.btn-large.waves-effect.waves-light.red#submit-pledgeform
+    a.btn-floating.btn-large.waves-effect.waves-light#submit-pledgeform
       i.material-icons send

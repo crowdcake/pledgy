@@ -5,8 +5,23 @@ block title
 
 block content
   div.container
-    h3= project.name
+    h3 I want to pledge for "#{project.name}".
     div.divider
-    div.container.pledge-box
-      div.pledge
-        h3.thin My name is <form> and I want to pledge <form> for #{project.name} by #{project.owner}
+    div.row
+      form.col.s12(action="/projects/#{project.id}/pledge", method="POST")#pledgeform
+        div.row
+          div.col.s12.m6.l6.input-field
+            input#user_name(type="text", name="user_name").validate
+            label(for="user_name") Your name
+          div.col.s12.m6.l6.input-field
+            input#amount(type="number", name="amount", step="any").validate
+            label(for="amount") Amount (in €)
+        div.row
+          div.col.s12
+            input#public(type="checkbox", checked="checked").filled-in
+            label(for="public") Should your pledge be publicly displayed?
+
+
+  div.fixed-action-btn.fancy-floating-button
+    a.btn-floating.btn-large.waves-effect.waves-light#submit-pledgeform
+      i.material-icons send

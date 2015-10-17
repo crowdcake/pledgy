@@ -19,12 +19,12 @@ router.post('/projects', function(req, res, next) {
     name: req.body.project_name,
     owner: req.body.project_owner,
     subtitle: req.body.project_subtitle,
-    goal: req.body.project_goal,
-    deadline: req.body.project_deadline,
+    goal: parseInt(req.body.project_goal),
+    deadline: Date.parse(req.body.project_deadline),
     description: req.body.project_description
   }
   db.createProject(newProject, function(id) {
-    res.redirect("/projects/#{id}");
+    res.redirect("/projects/" + id);
   });
 });
 

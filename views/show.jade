@@ -20,7 +20,7 @@ block content
     div.divider
     div.row
       div.col.s12
-        h5 Backers
+        h5 Pledges
         table.striped
           thead
             tr
@@ -35,5 +35,5 @@ block content
                 td #{pledge.amount / 100} €
     
   div.fixed-action-btn.fancy-floating-button
-    a.btn-floating.btn-large.waves-effect.waves-light.red(href="/project/#{project.id}/pledge")
+    a.btn-floating.btn-large.waves-effect.waves-light(href="/project/#{project.id}/pledge")
       i.material-icons star
