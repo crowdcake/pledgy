@@ -29,10 +29,11 @@ block content
               th Amount
           tbody
             each pledge in project.pledges
-              tr
-                td= pledge.user
-                td "someday"
-                td #{pledge.amount / 100} €
+              if pledge.public
+                tr
+                  td= pledge.user
+                  td= pledge.timestamp
+                  td #{pledge.amount / 100} €
     
   div.fixed-action-btn.fancy-floating-button
     a.btn-floating.btn-large.waves-effect.waves-light(href="/project/#{project.id}/pledge")

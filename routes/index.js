@@ -20,7 +20,7 @@ router.post('/projects', function(req, res, next) {
     owner: req.body.project_owner,
     subtitle: req.body.project_subtitle,
     goal: parseInt(req.body.project_goal),
-    deadline: Date.parse(req.body.project_deadline),
+    // deadline: Date.parse(req.body.project_deadline),
     description: req.body.project_description
   }
   db.createProject(newProject, function(id) {
@@ -33,9 +33,12 @@ router.get('/projects/new', function(req, res, next) {
 });
 
 router.get('/project/:id', function(req, res, next) {
-  console.log('project id');
   db.getProjectByID(req.params.id, function(result) {
-    res.render('show', {project: result});
+    if(result) {
+      res.render('show', {project: result});
+    } else {
+      res.status(404).render('notfound');
+    }
   });
 });
 
@@ -43,6 +46,16 @@ router.get('/project/:id/pledge', function(req, res, next) {
   db.getProjectByID(req.params.id, function(result) {
     res.render('pledge', {project: result});
   });
+});
+
+router.post('/project/:id/pledge', function(req, res, next) {
+  var pledge = {
+    user: req.body.pledge_user,
+    amount: (req.body.pledge_amount * 100),
+    public: ((req.body.pledge_public == 'on') ? true : false)
+  }
+  db.pledgeForProject(req.params.id, pledge);
+  res.redirect("/project/" + req.params.id);
 });
 
 router.get('/archive', function(req, res, next) {
