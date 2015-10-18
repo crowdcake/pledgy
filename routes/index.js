@@ -9,7 +9,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/projects', function(req, res, next) {
-  db.getAllProjects(function(result) {
+  db.getActiveProjects(function(result) {
     res.render('index', {projects: shuffle(result)});
   });
 });
@@ -58,9 +58,16 @@ router.post('/project/:id/pledge', function(req, res, next) {
   res.redirect("/project/" + req.params.id);
 });
 
+// TODO: Make into post
+router.get('/project/:id/archive', function(req, res, next) {
+  db.archiveProject(req.params.id, function () {
+    res.redirect('/project/' + req.params.id);
+  });
+});
+
 router.get('/archive', function(req, res, next) {
   db.getArchivedProjects(function(result) {
-    res.render('archive', {projects: result});
+    res.render('archive', { projects: shuffle(result) });
   });
 });
 
