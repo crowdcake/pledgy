@@ -3,7 +3,21 @@
 Crowdfunding for hackspaces and other small communities.
 
 ## Installation
-TODO.
 
-## TODO
-* Edit projects (owner token)
+Make sure, that you've already installed `brunch`.
+```
+npm install brunch -g
+```
+
+Then, install pledgy:
+
+```
+git clone https://github.com/h42i/pledgy.git
+npm install
+brunch build -P
+```
+
+And start it:
+```
+npm start
+```
