@@ -4,10 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var serveStatic = require('serve-static');
 var db = require('./lib/db');
 
-var main_routes = require('./routes/index');
-var api_routes = require('./routes/api');
+var main_routes = require('./routes/index'),
+    api_json_routes = require('./routes/api-json');
 
 var app = express();
 
@@ -23,8 +24,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Serve API-Doc
+app.use('/api', serveStatic(path.join(__dirname, 'apidoc')));
+
 app.use('/', main_routes);
-app.use('/api', api_routes);
+app.use('/api/json', api_json_routes);
 
 db.setup();
 

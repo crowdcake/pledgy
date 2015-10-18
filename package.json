@@ -18,6 +18,7 @@
     "morgan": "~1.6.1",
     "rethinkdb": "^2.1.1",
     "serve-favicon": "~2.3.0",
+    "serve-static": "^1.10.0",
     "shuffle-array": "^0.1.0"
   },
   "repository": {
@@ -40,5 +41,9 @@
     "brunch": "^1.8.5",
     "javascript-brunch": "^1.7.1",
     "sass-brunch": "^1.9.1"
+  },
+  "apidoc": {
+    "title": "Pledgy - API Documentation",
+    "url": "/api/"
   }
 }
