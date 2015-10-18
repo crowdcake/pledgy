@@ -4,6 +4,23 @@ var express = require('express');
 var router = express.Router();
 var shuffle = require('shuffle-array');
 
+function rmPledgerNameArr(projectArray) {
+    for(var i = 0; i < projectArray.length; i++) {
+        rmPledgerName(projectArray[i]);
+    }
+    return projectArray;
+}
+
+function rmPledgerName(project) {
+    if (project.pledges != undefined || project.pledges.length < 1) {
+        for (var i = 0; i < project.pledges.length; i++) {
+            if (project.pledges[i].public == false)
+                project.pledges[i].user = 'anonymous';
+        }
+    }
+    return project;
+}
+
 /**
  * @api {get} json/active_projects Get all projects (active & archived)
  * @apiVersion 0.0.1
@@ -54,7 +71,7 @@ var shuffle = require('shuffle-array');
  */
 router.get('/projects', function(req, res, next) {
     db.getAllProjects(function(result) {
-      res.json({ projects: shuffle(result) });
+      res.json({ projects: shuffle(rmPledgerNameArr(result)) });
     });
 });
 
@@ -108,7 +125,7 @@ router.get('/projects', function(req, res, next) {
  */
 router.get('/active_projects', function(req, res, next) {
     db.getActiveProjects(function(result) {
-      res.json({ projects: shuffle(result) });
+      res.json({ projects: shuffle(rmPledgerNameArr(result)) });
     });
 });
 
@@ -162,9 +179,10 @@ router.get('/active_projects', function(req, res, next) {
  */
 router.get('/archived_projects', function(req, res, next) {
     db.getArchivedProjects(function(result) {
-      res.json({ projects: shuffle(result) });
+      res.json({ projects: shuffle(rmPledgerNameArr(result)) });
     });
 });
+
 
 
 module.exports = router;
