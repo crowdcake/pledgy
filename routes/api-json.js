@@ -1,4 +1,5 @@
-var db = require('../lib/db');
+var config = require('../config.json');
+var db = require('../db/' + config.database + '.js');
 
 var express = require('express');
 var router = express.Router();
@@ -22,7 +23,7 @@ function rmPledgerName(project) {
 }
 
 /**
- * @api {get} json/active_projects Get all projects (active & archived)
+ * @api {get} json/projects Get all projects (active & archived)
  * @apiVersion 0.0.1
  * @apiName GetAllProjects
  * @apiGroup JSON
@@ -130,7 +131,7 @@ router.get('/active_projects', function(req, res, next) {
 });
 
 /**
- * @api {get} json/active_projects Get all archived projects
+ * @api {get} json/archived_projects Get all archived projects
  * @apiVersion 0.0.1
  * @apiName GetAllArchivedProjects
  * @apiGroup JSON
@@ -245,7 +246,7 @@ router.get('/project/:id', function(req, res, next) {
 });
 
 /**
- * @api {post} json/project/new Create a new project
+ * @api {post} json/projects/new Create a new project
  * @apiVersion 0.0.1
  * @apiName CreateProject
  * @apiGroup JSON
@@ -272,16 +273,52 @@ router.get('/project/:id', function(req, res, next) {
  *       "error": "missing_field"
  *     }
  */
-router.post('/project/new', function(req, res, next) {
+// TODO: Throw missing field error
+router.post('/projects/new', function(req, res, next) {
     var newProject = {
-      name: req.body.project_name,
-      owner: req.body.project_owner,
-      subtitle: req.body.project_subtitle,
-      goal: parseInt(req.body.project_goal),
-      description: req.body.project_description
+        name: req.body.project_name,
+        owner: req.body.project_owner,
+        subtitle: req.body.project_subtitle,
+        goal: parseInt(req.body.project_goal),
+        description: req.body.project_description
     }
     db.createProject(newProject, function(id) {
-      res.status(200).json({id: id});
+        res.status(200).json({id: id});
+    });
+});
+
+/**
+ * @api {post} json/project/:id/pledge Pledge for a project
+ * @apiVersion 0.0.1
+ * @apiName PledgeProject
+ * @apiGroup JSON
+ *
+ * @apiParam {String} pledge_user Name of user.
+ * @apiParam {String} pledge_amount Amount to pledge (in cents).
+ * @apiParam {Boolean} pledge_public Whether the name should be publicly displayed.
+ *
+ * @apiSuccess {String} id Project-UID
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *
+ * @apiError MissingField Not all nescessary fields are given.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "missing_field"
+ *     }
+ */
+// TODO: Throw missing field error
+router.post('/project/:id/pledge', function(req, res, next) {
+    var pledge = {
+        user: req.body.pledge_user,
+        amount: req.body.pledge_amount,
+        public: req.body.pledge_public
+    }
+    db.pledgeForProject(req.params.id, pledge, function (id) {
+        res.status(200).send('done');
     });
 });
 
