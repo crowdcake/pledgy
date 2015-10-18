@@ -244,5 +244,45 @@ router.get('/project/:id', function(req, res, next) {
     });
 });
 
+/**
+ * @api {post} json/project/new Create a new project
+ * @apiVersion 0.0.1
+ * @apiName CreateProject
+ * @apiGroup JSON
+ *
+ * @apiParam {String} project_name Name of project.
+ * @apiParam {String} owner_name Name of owner.
+ * @apiParam {String} project_subtitle Short description of project.
+ * @apiParam {Number} project_goal Project-Goal in cents.
+ * @apiParam {String} project_description (Longer) project description.
+ *
+ * @apiSuccess {String} id Project-UID
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *         "id":"4ffd324c-30cf-43ef-b770-6432ccb669a8"
+ *     }
+ *
+ * @apiError MissingField Not all nescessary fields are given.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "missing_field"
+ *     }
+ */
+router.post('/project/new', function(req, res, next) {
+    var newProject = {
+      name: req.body.project_name,
+      owner: req.body.project_owner,
+      subtitle: req.body.project_subtitle,
+      goal: parseInt(req.body.project_goal),
+      description: req.body.project_description
+    }
+    db.createProject(newProject, function(id) {
+      res.status(200).json({id: id});
+    });
+});
 
 module.exports = router;
