@@ -9,8 +9,11 @@ block content
     h3 Projects
     ul.collection.projects
       each project in projects
-        a.collection-item(href='/project/#{project.id}') 
-          h5 #{project.name}
+        a.collection-item(href='/project/#{project.id}')
+          if project.funded
+            h5 Funded - #{project.name}
+          else
+            h5 #{project.name}
           p #{project.subtitle}
   
   

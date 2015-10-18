@@ -59,7 +59,7 @@ router.post('/project/:id/pledge', function(req, res, next) {
 });
 
 router.get('/archive', function(req, res, next) {
-  db.getFundedProjects(function(result) {
+  db.getArchivedProjects(function(result) {
     res.render('archive', {projects: result});
   });
 });
