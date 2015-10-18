@@ -1,4 +1,5 @@
-var db = require('../lib/db');
+var config = require('../config.json');
+var db = require('../db/' + config.database + '.js');
 
 var express = require('express');
 var router = express.Router();
