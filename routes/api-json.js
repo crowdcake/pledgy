@@ -12,7 +12,7 @@ function rmPledgerNameArr(projectArray) {
 }
 
 function rmPledgerName(project) {
-    if (project.pledges != undefined || project.pledges.length < 1) {
+    if (project != undefined && project.pledges != undefined && project.pledges.length < 1) {
         for (var i = 0; i < project.pledges.length; i++) {
             if (project.pledges[i].public == false)
                 project.pledges[i].user = 'anonymous';
@@ -183,6 +183,66 @@ router.get('/archived_projects', function(req, res, next) {
     });
 });
 
+/**
+ * @api {get} json/project/:id Get a specific project's data
+ * @apiVersion 0.0.1
+ * @apiName GetProject
+ * @apiGroup JSON
+ *
+ * @apiSuccess {String} id Project-UID
+ * @apiSuccess {String} name Project name
+ * @apiSuccess {String} subtitle  Short description of the project
+ * @apiSuccess {String} owner Name of project-owner
+ * @apiSuccess {Timestamp} created Project's create-timestamp
+ * @apiSuccess {String} description Longer description of the project's goal
+ * @apiSuccess {Number} goal Project's funding-goal in cents
+ * @apiSuccess {Number} current Project's current funding
+ * @apiSuccess {Object[]} pledges Array of Pledges
+ *   @apiSuccess {String} pledges.user Name of pledging user
+ *   @apiSuccess {Boolean} pledges.public Whether the pledge should publicly be displayed
+ *   @apiSuccess {Number} pledges.amount Pledge-Amount in cents
+ *   @apiSuccess {Timestamp} pledges.timestamp Timestamp of Pledge-Submit
+ * @apiSuccess {Boolean} funded True if the projects has been successfully funded
+ * @apiSuccess {Boolean} archived True if project is archived; False if active
+ *
+ * @apiSuccessExample Success-Response:
+ *     HTTP/1.1 200 OK
+ *     {
+ *         "created":"2015-10-18T11:13:18.561Z",
+ *         "current":7300,
+ *         "description":"Lorem ipsum dolor sit amet.",
+ *         "funded":false,
+ *         "archived":true,
+ *         "goal":86300,
+ *         "id":"4ffd324c-30cf-43ef-b770-6432ccb669a8",
+ *         "name":"Fusion power plant",
+ *         "owner":"Bob",
+ *         "pledges":[
+ *             {
+ *                 "amount":7300,
+ *                 "public":true,
+ *                 "timestamp":"2015-10-18T11:14:32.565Z",
+ *                 "user":"Alice"
+ *             }
+ *         ],
+ *         "subtitle":"Revolutionize the world! Pure awesomeness."
+ *     }
+ *
+ * @apiError ProjectNotFound No project is associated with this UID.
+ *
+ * @apiErrorExample Error-Response:
+ *     HTTP/1.1 404 Not Found
+ *     {
+ *       "error": "project_not_found"
+ *     }
+ */
+router.get('/project/:id', function(req, res, next) {
+    db.getProjectByID(req.params.id, function(project) {
+        if (project == null)
+            res.status(404).json({error: 'project_not_found'});
+        res.json(rmPledgerName(project));
+    });
+});
 
 
 module.exports = router;
