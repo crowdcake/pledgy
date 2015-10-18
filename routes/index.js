@@ -54,8 +54,9 @@ router.post('/project/:id/pledge', function(req, res, next) {
     amount: (req.body.pledge_amount * 100),
     public: ((req.body.pledge_public == 'on') ? true : false)
   }
-  db.pledgeForProject(req.params.id, pledge);
-  res.redirect("/project/" + req.params.id);
+  db.pledgeForProject(req.params.id, pledge, function(id) {
+    res.redirect("/project/" + req.params.id);
+  });
 });
 
 // TODO: Make into post
