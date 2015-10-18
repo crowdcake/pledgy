@@ -14,7 +14,11 @@ router.get('/projects', function(req, res, next) {
   });
 });
 
-router.post('/projects', function(req, res, next) {
+router.get('/projects/new', function(req, res, next) {
+  res.render('new');
+});
+
+router.post('/projects/new', function(req, res, next) {
   var newProject = {
     name: req.body.project_name,
     owner: req.body.project_owner,
@@ -26,10 +30,6 @@ router.post('/projects', function(req, res, next) {
   db.createProject(newProject, function(id) {
     res.redirect("/project/" + id);
   });
-});
-
-router.get('/projects/new', function(req, res, next) {
-  res.render('new');
 });
 
 router.get('/project/:id', function(req, res, next) {
