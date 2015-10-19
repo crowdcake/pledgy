@@ -53,7 +53,6 @@ router.get('/project/:id/edit', function(req, res, next) {
 });
 
 router.post('/project/:id/update', function(req, res, next) {
-  console.log(req.body);
   var updatedProject = {
     name: req.body.project_name,
     owner: req.body.project_owner,

@@ -19,7 +19,18 @@ function renameIDField (project) {
 }
 
 module.exports.setup = function() {
-  mongoose.connect("mongodb://" + config.database.host + "/pledgy");
+  var auth_string = "";
+
+  if (config.database.user != "")
+    auth_string = config.database.user + ":" +
+    config.database.pass + "@";
+
+  mongoose.connect(
+    "mongodb://" +
+    auth_string +
+    config.database.host + ":" +
+    config.database.port + "/" +
+    config.database.db);
 }
 
 // Get all projects
@@ -101,3 +112,19 @@ module.exports.pledgeForProject = function(project_id, pledge, callback) {
     })
   });
 };
+
+// Update Project
+module.exports.updateProject = function(project_id, updatedProject, callback) {
+  Project.findOne({ _id: project_id }, function(err, project) {
+    project.name = updatedProject.name;
+    project.owner = updatedProject.owner;
+    project.subtitle = updatedProject.subtitle;
+    project.goal = updatedProject.goal;
+    project.archived = updatedProject.archived;
+
+    project.save(function (err, project) {
+      if (err) throw err;
+      callback(project_id);
+    });
+  });
+}
