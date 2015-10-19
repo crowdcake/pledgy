@@ -4,13 +4,17 @@ var mongoose = require('mongoose');
 var Project = require('./mongoose_models/projects');
 
 function renameIDFieldArr (projectArr) {
-    for (var i = 0; i < projectArr.length; i++)
-        projectArr[i] = renameIDField(projectArr[i]);
-    return projectArr;
+    var newProjects = [];
+    projectArr.forEach(function(project) {
+        newProjects.push(renameIDField(project));
+    });
+    return newProjects;
 }
 
 function renameIDField (project) {
-    project['id'] = project['_id'];
+    project = project.toObject();
+    project['id'] = project['_id'].toString();
+    delete project['_id'];
     return project;
 }
 
@@ -45,8 +49,8 @@ module.exports.getArchivedProjects = function(callback) {
 // Get project by ID
 module.exports.getProjectByID = function(project_id, callback) {
     Project.findOne({ '_id': project_id }, function (err, project) {
-        if (err) throw err;
-        callback(renameIDField(project));
+        if (err || project == undefined) callback(undefined);
+        else callback(renameIDField(project));
     });
 };
 
