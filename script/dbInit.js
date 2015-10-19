@@ -23,17 +23,11 @@ r.connect({host: config.database.host, port: config.database.port, db: config.da
   if (tables.indexOf('projects') == -1) {
     return r.db(config.database.db).tableCreate('projects').run(connection);
   } else {
-    console.log("[dbInit] table exists already.")
+    console.log("[dbInit] table exists already")
     if (args[0] == "-f") {
-      console.log("[dbInit] dropping table");
-      return r.db(config.database.db).tableDrop('projects').run(connection);
+      console.log("[dbInit] wiping table");
+      return r.db(config.database.db).table('projects').delete().run(connection);
     }
-  }
-})
-.then(function() {
-  if (args[0] == "-f") {
-    console.log("[dbInit] creating table");
-    return r.db(config.database.db).tableCreate('projects').run(connection);
   }
 })
 .then(function() {
