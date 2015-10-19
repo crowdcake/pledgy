@@ -29,9 +29,10 @@ Initialize your database:
 node script/dbInit.js
 ```
 
-Build all the stylesheets and assets:
+Build all the stylesheets copy the font files:
 ```sh
 brunch build -P
+cp -r bower_components/Materialize/font public/font
 ```
 
 And start it:

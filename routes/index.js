@@ -24,8 +24,7 @@ router.post('/projects/new', function(req, res, next) {
     name: req.body.project_name,
     owner: req.body.project_owner,
     subtitle: req.body.project_subtitle,
-    goal: parseInt(req.body.project_goal) * 100,
-    // deadline: Date.parse(req.body.project_deadline),
+    goal: (parseInt(req.body.project_goal) * 100),
     description: req.body.project_description
   }
   db.createProject(newProject, function(id) {
@@ -53,9 +52,19 @@ router.get('/project/:id/edit', function(req, res, next) {
   });
 });
 
-router.post('project/:id/update', function(req, res, next) {
-  console.log(req.params);
-  res.redirect("/project/" + req.params.id);
+router.post('/project/:id/update', function(req, res, next) {
+  console.log(req.body);
+  var updatedProject = {
+    name: req.body.project_name,
+    owner: req.body.project_owner,
+    subtitle: req.body.project_subtitle,
+    goal: (parseInt(req.body.project_goal) * 100),
+    archived: ((req.body.project_archived == "on") ? true : false)
+    // TODO: Add description
+  }
+  db.updateProject(req.params.id, updatedProject, function(id) {
+    res.redirect("/project/" + id);
+  });
 });
 
 router.get('/project/:id/pledge', function(req, res, next) {

@@ -89,4 +89,11 @@ module.exports.pledgeForProject = function(project_id, pledge, callback) {
     if (err) throw err;
   });
   callback(project_id);
-};
+}
+
+module.exports.updateProject = function(projectID, updatedProject, callback) {
+  r.table('projects').get(projectID).update(updatedProject).run(connection, function(err, result) {
+    if (err) throw err;
+    callback(projectID);
+  });
+}
