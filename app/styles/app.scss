@@ -1,0 +1,63 @@
+@import "bower_components/Materialize/sass/components/color";
+
+$primary-color: color("blue", "lighten-1");
+$secondary-color: color("red", "base");
+
+@import 'bower_components/Materialize/sass/materialize';
+@import url(https://fonts.googleapis.com/icon?family=Material+Icons);
+@import url(https://fonts.googleapis.com/css?family=Lobster+Two:700);
+
+.action-button {
+  margin-top: 2rem;
+  @media #{$small-and-down} {
+    margin-top: 0px;
+    margin-bottom: 4vh;
+  }
+  width: 100%;
+}
+
+.project-title {
+  .archived {
+    color: grey;
+    //  $blur: 4px;
+    //  -webkit-filter: blur($blur);
+    //  -moz-filter: blur($blur);
+    //  -ms-filter: blur($blur);
+    //  -o-filter: blur($blur);
+    //  filter: blur($blur);
+  }
+}
+
+.fancy-floating-button {
+  a {
+    background-color: $secondary-color;
+  }
+  bottom: 4vh;
+  right: 4vh;
+}
+
+.brand-logo {
+  font-family: 'Lobster Two', cursive;
+}
+
+.money-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .money {
+    font-size: 4em;
+  }
+}
+
+.collection {
+  a.collection-item {
+    color: $primary-color-dark;
+  }
+}
+
+.progress {
+  background-color: rgba(0, 0, 0, 0.1);
+  .determinate {
+    background-color: $secondary-color;
+  }
+}

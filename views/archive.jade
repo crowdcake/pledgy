@@ -1,0 +1,16 @@
+extends layout
+
+block title
+  title Archived projects - pledgy
+
+block content
+  div.container
+    h3 Archive
+    ul.collection
+      each project in projects
+        a.collection-item(href='/project/#{project.id}') 
+          h5= project.name
+          p= project.subtitle
+  div.fixed-action-btn.fancy-floating-button
+    a.btn-floating.btn-large.waves-effect.waves-light.red(href="/projects/new")
+      i.material-icons add

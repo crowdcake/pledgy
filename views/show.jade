@@ -1,0 +1,51 @@
+extends layout
+
+block title
+  title #{project.name} by #{project.owner} - pledgy
+
+block content
+  div.container
+    div.row(style="margin-bottom: 0px;")
+      div.col.s12.m8.l8
+        if project.archived
+          h3.project-title.archived= project.name
+        else
+          h3.project-title= project.name
+      div.col.s6.m2.l2
+        if project.archived
+          a.waves-effect.waves-light.btn.action-button.disabled Edit
+        else
+          a.waves-effect.waves-light.btn.action-button(href="/project/#{project.id}/edit") Edit
+      div.col.s6.m2.l2
+        a.waves-effect.waves-light.btn.action-button.disabled Delete
+    div.divider
+    div.row
+      div.col.s12.m6.l6
+        h5 Project description
+        p= project.description
+      div.col.s12.m6.l6
+        h5 Funding progress
+        div.progress(style="height: 2vh;")
+          div.determinate(style="width: #{(project.current / project.goal) * 100}%")
+        div.card.money-box
+          h1.thin.money #{project.current / 100} € / #{project.goal / 100} €
+    div.divider
+    div.row
+      div.col.s12
+        h5 Pledges
+        table.striped
+          thead
+            tr
+              th Name
+              th Date
+              th Amount
+          tbody
+            each pledge in project.pledges
+              tr
+                td= (pledge.public ? pledge.user : " ")
+                td= pledge.timestamp
+                td #{pledge.amount / 100} €
+  if !project.archived
+    div.fixed-action-btn.fancy-floating-button
+      a.btn-floating.btn-large.waves-effect.waves-light(href="/project/#{project.id}/pledge")
+        i.material-icons star

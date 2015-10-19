@@ -1,0 +1,25 @@
+extends layout
+
+block title
+  title #{project.name} by #{project.owner} - pledgy
+
+block content
+  div.container
+    h3 I want to pledge for "#{project.name}".
+    div.divider
+    div.row
+      form.col.s12(action="/project/#{project.id}/pledge", method="POST")
+        div.row
+          div.col.s12.m6.l6.input-field
+            input#pledge_user(type="text", name="pledge_user" required).validate
+            label(for="pledge_user") Your name
+          div.col.s12.m6.l6.input-field
+            input#pledge_amount(type="number", name="pledge_amount", step="any" required).validate
+            label(for="pledge_amount") Amount (in €)
+        div.row
+          div.col.s12
+            input#pledge_public(type="checkbox", checked="checked", name="pledge_public").filled-in
+            label(for="pledge_public") Should your pledge be publicly displayed?
+        div.fixed-action-btn.fancy-floating-button
+          button.btn-floating.btn-large.waves-effect.waves-light(type="submit", method="action")
+            i.material-icons send
