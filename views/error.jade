@@ -1,6 +1,11 @@
 extends layout
 
+block title
+  title Ooops - pledgy
+
 block content
-  h1= message
-  h2= error.status
-  pre #{error.stack}
+  div.container
+    h3= message
+      small.thin(style="background-color: rgba(0,0,0, 0.1); margin-left: 2vw; padding: 5px;")= error.status
+    div.divider
+    pre #{error.stack}

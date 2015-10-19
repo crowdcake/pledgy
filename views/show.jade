@@ -5,10 +5,19 @@ block title
 
 block content
   div.container
-    if project.archived
-      h3 #{project.name} - Archived
-    else  
-      h3= project.name
+    div.row(style="margin-bottom: 0px;")
+      div.col.s12.m8.l8
+        if project.archived
+          h3.project-title.archived= project.name
+        else
+          h3.project-title= project.name
+      div.col.s6.m2.l2
+        if project.archived
+          a.waves-effect.waves-light.btn.action-button.disabled Edit
+        else
+          a.waves-effect.waves-light.btn.action-button(href="/project/#{project.id}/edit") Edit
+      div.col.s6.m2.l2
+        a.waves-effect.waves-light.btn.action-button.disabled Delete
     div.divider
     div.row
       div.col.s12.m6.l6

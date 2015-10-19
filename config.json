@@ -1,7 +1,0 @@
-{
-    "database":"mongodb",
-
-    "mongodb": {
-        "url": "mongodb://localhost/pledgy"
-    }
-}

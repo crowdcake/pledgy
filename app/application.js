@@ -2,18 +2,8 @@
 
 var App = {
   init: function init() {
-    
+    $(".button-collapse").sideNav();
     console.log('App initialized.');
-    
-    $('#submit-pledgeform').click(function() {
-      $('#pledgeform').submit();
-    });
-
-//    $('#datepicker').pickadate({
-//      selectMonths: true,
-//      min: new Date()
-//    });
-
   }
 };
 

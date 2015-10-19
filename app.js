@@ -5,11 +5,11 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var serveStatic = require('serve-static');
-var config = require('./config.json');
-var db = require('./db/' + config.database + '.js');
+var config = require('./config/config.json');
+var db = require('./db/' + config.database.type + '.js');
 
-var main_routes = require('./routes/index'),
-    api_json_routes = require('./routes/api-json');
+var main_routes = require('./routes/index');
+var api_json_routes = require('./routes/api-json');
 
 var app = express();
 
@@ -17,8 +17,6 @@ var app = express();
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
-// uncomment after placing your favicon in /public
-app.use(favicon(path.join(__dirname, 'favicon.ico')));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -60,7 +58,7 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error', {
     message: err.message,
-    error: {}
+    error: {code: err.code}
   });
 });
 

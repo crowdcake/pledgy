@@ -2,7 +2,7 @@
   "private": true,
   "name": "pledgy",
   "version": "0.0.1",
-  "description": "An internal system for crowdfunding projects",
+  "description": "A crowdfunding platform for hackspaces and other small communities",
   "author": "lschuermann and Eddy Shure",
   "main": "bin/www",
   "scripts": {
@@ -25,9 +25,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/h42i/Pledgy.git"
+    "url": "git+https://github.com/h42i/pledgy.git"
   },
   "keywords": [
+    "crowdfunding",
+    "hackspace",
+    "community",
+    "clubs",
     "project",
     "pledge",
     "system",
@@ -36,16 +40,16 @@
   ],
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/h42i/Pledgy/issues"
+    "url": "https://github.com/h42i/pledgy/issues"
   },
-  "homepage": "https://github.com/h42i/Pledgy#readme",
+  "homepage": "https://github.com/h42i/pledgy",
   "devDependencies": {
     "brunch": "^1.8.5",
     "javascript-brunch": "^1.7.1",
     "sass-brunch": "^1.9.1"
   },
   "apidoc": {
-    "title": "Pledgy - API Documentation",
+    "title": "pledgy - apidoc",
     "url": "/api/"
   }
 }

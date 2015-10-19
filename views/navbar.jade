@@ -2,6 +2,8 @@ nav
   div.nav-wrapper
     div.container
       a.brand-logo(href="/") pledgy 
+      a(href="#", data-activates="mobile-demo").button-collapse
+        i.material-icons menu
       ul#nav-mobile.right.hide-on-med-and-down
         li
           a(href="/archive")
@@ -12,3 +14,10 @@ nav
         li
           a(href="/about")
             i.material-icons info_outline
+      ul.side-nav#mobile-demo
+        li
+          a(href="/archive") Archive
+        li
+          a(href="/api") API
+        li
+          a(href="/about") About

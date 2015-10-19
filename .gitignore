@@ -26,10 +26,12 @@ build/Release
 # Dependency directory
 # https://docs.npmjs.com/misc/faq#should-i-check-my-node-modules-folder-into-git
 node_modules
-# Bower deps
+
+# Custom
 bower_components
 public
 app/components
+config.json
 
 # -----> MAC OS X <-----
 .DS_Store

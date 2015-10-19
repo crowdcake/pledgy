@@ -1,5 +1,5 @@
-var config = require('../config.json');
-var db = require('../db/' + config.database + '.js');
+var config = require('../config/config.json');
+var db = require('../db/' + config.database.type + '.js');
 
 var express = require('express');
 var router = express.Router();
@@ -35,12 +35,27 @@ router.post('/projects/new', function(req, res, next) {
 
 router.get('/project/:id', function(req, res, next) {
   db.getProjectByID(req.params.id, function(result) {
-    if(result) {
+    if (result) {
       res.render('show', {project: result});
     } else {
       res.status(404).render('notfound');
     }
   });
+});
+
+router.get('/project/:id/edit', function(req, res, next) {
+  db.getProjectByID(req.params.id, function(result) {
+    if (result) {
+      res.render('edit', {project: result});
+    } else {
+      res.status(404).render('notfound');
+    }
+  });
+});
+
+router.post('project/:id/update', function(req, res, next) {
+  console.log(req.params);
+  res.redirect("/project/" + req.params.id);
 });
 
 router.get('/project/:id/pledge', function(req, res, next) {
