@@ -2,6 +2,7 @@
   "database": {
     "type": "rethinkdb",
     "host": "localhost",
-    "port": 28015
+    "port": 28015,
+    "db": "pledgy"
   }
 }

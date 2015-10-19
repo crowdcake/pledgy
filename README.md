@@ -24,8 +24,9 @@ npm install
 bower install
 ```
 
-Initialize your database:
+Copy configuration and initialize your database:
 ```sh
+cp config/config.json.example config/config.json
 node script/dbInit.js
 ```
 
