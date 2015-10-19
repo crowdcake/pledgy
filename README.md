@@ -12,7 +12,7 @@ npm install brunch -g
 Then, install pledgy:
 
 ```
-git clone https://github.com/h42i/pledgy.git
+git clone https://github.com/h42i/pledgy.git; cd pledgy
 npm install
 brunch build -P
 ```
