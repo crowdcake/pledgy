@@ -42,3 +42,10 @@ NODE_ENV=production npm start
 ```
 
 ## Configuration
+TODO
+
+## Contributors
+TODO
+
+## License
+TODO
