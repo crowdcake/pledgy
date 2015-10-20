@@ -18,7 +18,7 @@ block content
             label(for="project_owner") Your name
         div.row
           div.col.s12.m6.l6.input-field
-            input#project_subtitle(value="#{project.subtitle}", type="text", length="42", name="project_subtitle").validate
+            input#project_subtitle(value="#{project.subtitle}", type="text", length="42", maxlength="42", name="project_subtitle").validate
             label(for="project_subtitle") Short description
           div.col.s12.m6.l6.input-field
             input#project_goal(value="#{project.goal / 100}", type="number", min="1", name="project_goal").validate

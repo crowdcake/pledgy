@@ -14,7 +14,7 @@ block content
             input#pledge_user(type="text", name="pledge_user" required).validate
             label(for="pledge_user") Your name
           div.col.s12.m6.l6.input-field
-            input#pledge_amount(type="number", name="pledge_amount", step="any" required).validate
+            input#pledge_amount(type="number", min="1", name="pledge_amount", step="any" required).validate
             label(for="pledge_amount") Amount (in €)
         div.row
           div.col.s12
