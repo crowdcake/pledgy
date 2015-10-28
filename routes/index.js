@@ -53,14 +53,13 @@ router.get('/project/:id/edit', function(req, res, next) {
 });
 
 router.post('/project/:id/update', function(req, res, next) {
-  console.log(req.body);
   var updatedProject = {
     name: req.body.project_name,
     owner: req.body.project_owner,
     subtitle: req.body.project_subtitle,
     goal: (parseInt(req.body.project_goal) * 100),
-    archived: ((req.body.project_archived == "on") ? true : false)
-    // TODO: Add description
+    archived: ((req.body.project_archived == "on") ? true : false),
+    description: req.body.project_description
   }
   db.updateProject(req.params.id, updatedProject, function(id) {
     res.redirect("/project/" + id);

@@ -6,20 +6,18 @@ var router = express.Router();
 var shuffle = require('shuffle-array');
 
 function rmPledgerNameArr(projectArray) {
-    for(var i = 0; i < projectArray.length; i++) {
-        rmPledgerName(projectArray[i]);
-    }
-    return projectArray;
+  projectArray.forEach(function (project) {
+    rmPledgerName(project);
+  })
+  return projectArray;
 }
 
 function rmPledgerName(project) {
-    if (project != undefined && project.pledges != undefined && project.pledges.length < 1) {
-        for (var i = 0; i < project.pledges.length; i++) {
-            if (project.pledges[i].public == false)
-                project.pledges[i].user = 'anonymous';
-        }
-    }
-    return project;
+  project.pledges.forEach(function (pledge) {
+    if (pledge.public == false)
+      pledge.user = 'anonymous';
+  });
+  return project;
 }
 
 /**

@@ -91,8 +91,8 @@ module.exports.pledgeForProject = function(project_id, pledge, callback) {
   callback(project_id);
 }
 
-module.exports.updateProject = function(projectID, updatedProject, callback) {
-  r.table('projects').get(projectID).update(updatedProject).run(connection, function(err, result) {
+module.exports.updateProject = function(project_id, updatedProject, callback) {
+  r.table('projects').get(project_id).update(updatedProject).run(connection, function(err, result) {
     if (err) throw err;
     callback(projectID);
   });

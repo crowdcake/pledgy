@@ -3,6 +3,18 @@ var mongoose = require('mongoose');
 
 var Project = require('./mongoose_models/projects');
 
+function timestampsToDateObjects (projects) {
+  if (projects != undefined) projects.forEach(function (project) {
+    timestampToDateObject(project);
+  });
+}
+
+function timestampToDateObject (project) {
+  if (project != undefined) project.pledges.forEach(function (pledge) {
+    pledge.timestamp = new Date(pledge.timestamp);
+  });
+}
+
 function renameIDFieldArr (projectArr) {
   var newProjects = [];
   projectArr.forEach(function(project) {
@@ -19,13 +31,25 @@ function renameIDField (project) {
 }
 
 module.exports.setup = function() {
-  mongoose.connect("mongodb://" + config.database.host + "/pledgy");
+  var auth_string = "";
+
+  if (config.database.user != "")
+    auth_string = config.database.user + ":" +
+    config.database.pass + "@";
+
+  mongoose.connect(
+    "mongodb://" +
+    auth_string +
+    config.database.host + ":" +
+    config.database.port + "/" +
+    config.database.db);
 }
 
 // Get all projects
 module.exports.getAllProjects = function(callback) {
   Project.find({}, function(err, projects) {
     if (err) throw err;
+    timestampsToDateObjects(projects);
     callback(renameIDFieldArr(projects));
   });
 };
@@ -34,6 +58,7 @@ module.exports.getAllProjects = function(callback) {
 module.exports.getActiveProjects = function(callback) {
   Project.find({archived: false}, function(err, projects) {
     if (err) throw err;
+    timestampsToDateObjects(projects);
     callback(renameIDFieldArr(projects));
   });
 };
@@ -42,6 +67,7 @@ module.exports.getActiveProjects = function(callback) {
 module.exports.getArchivedProjects = function(callback) {
   Project.find({archived: true}, function(err, projects) {
     if (err) throw err;
+    timestampsToDateObjects(projects);
     callback(renameIDFieldArr(projects));
   });
 }
@@ -50,7 +76,10 @@ module.exports.getArchivedProjects = function(callback) {
 module.exports.getProjectByID = function(project_id, callback) {
   Project.findOne({ '_id': project_id }, function (err, project) {
     if (err || project == undefined) callback(undefined);
-    else callback(renameIDField(project));
+    else {
+      timestampToDateObject(project);
+      callback(renameIDField(project));
+    }
   });
 };
 
@@ -101,3 +130,20 @@ module.exports.pledgeForProject = function(project_id, pledge, callback) {
     })
   });
 };
+
+// Update Project
+module.exports.updateProject = function(project_id, updatedProject, callback) {
+  Project.findOne({ _id: project_id }, function(err, project) {
+    project.name = updatedProject.name;
+    project.owner = updatedProject.owner;
+    project.subtitle = updatedProject.subtitle;
+    project.goal = updatedProject.goal;
+    project.archived = updatedProject.archived;
+    project.description = updatedProject.description;
+
+    project.save(function (err, project) {
+      if (err) throw err;
+      callback(project_id);
+    });
+  });
+}
