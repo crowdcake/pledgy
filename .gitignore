@@ -29,7 +29,9 @@ node_modules
 
 # Custom
 bower_components
-public
+public/font
+public/js
+public/stylesheets
 app/components
 config.json
 
