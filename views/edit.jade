@@ -24,6 +24,10 @@ block content
             input#project_goal(value="#{project.goal / 100}", type="number", min="1", name="project_goal").validate
             label(for="project_goal") Funding goal (in €)
         div.row
+          div.col.s12.m12.l12.input-field
+            textarea.materialize-textarea#project_description(name="project_description").validate= project.description
+            label(for="project_description") Project description
+        div.row
           div.col.s12.m12.l12
             input#project_archived(type="checkbox", name="project_archived").filled-in
             label(for="project_archived") Move to archive
