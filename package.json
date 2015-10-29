@@ -3,7 +3,7 @@
   "name": "pledgy",
   "version": "0.0.1",
   "description": "A crowdfunding platform for hackspaces and other small communities",
-  "author": "lschuermann and Eddy Shure",
+  "author": "crowdcake",
   "main": "bin/www",
   "scripts": {
     "start": "node ./bin/www"
@@ -28,7 +28,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/h42i/pledgy.git"
+    "url": "git+https://github.com/crowdcake/pledgy.git"
   },
   "keywords": [
     "crowdfunding",
@@ -43,9 +43,9 @@
   ],
   "license": "GPL-3.0",
   "bugs": {
-    "url": "https://github.com/h42i/pledgy/issues"
+    "url": "https://github.com/crowdcake/pledgy/issues"
   },
-  "homepage": "https://github.com/h42i/pledgy",
+  "homepage": "https://github.com/crowdcake/pledgy",
   "devDependencies": {
     "brunch": "^1.8.5",
     "javascript-brunch": "^1.7.1",
