@@ -1,5 +1,4 @@
 var r = require('rethinkdb');
-
 var connection = null;
 
 // Setup the database connection
@@ -43,9 +42,13 @@ module.exports.getArchivedProjects = function(callback) {
   });
 }
 
-// Get project by ID
+// Get project by ID (including pledges)
 module.exports.getProjectByID = function(project_id, callback) {
-  r.table('projects').get(project_id).run(connection, function(err, result) {
+  r.table('projects').get(project_id).merge(function(project) {
+    return {
+      pledges: r.table('pledges').getAll(project_id, {index: 'project'}).coerceTo('array')
+    }
+  }).run(connection, function(err, result) {
     if (err) throw err;
     callback(result);
   });
@@ -57,7 +60,6 @@ module.exports.createProject = function(project, callback) {
   project.current = 0;
   project.funded = false;
   project.archived = false;
-  project.pledges = [];
 
   r.table('projects').insert(project).run(connection, function(err, result) {
     if (err) throw err;
@@ -76,10 +78,10 @@ module.exports.archiveProject = function(project_id, callback) {
 // Create pledge for project
 module.exports.pledgeForProject = function(project_id, pledge, callback) {
   pledge.timestamp = r.now();
+  pledge.project = project_id;
+
   // Insert new pledge object
-  r.table('projects').get(project_id).update({
-    pledges: r.row('pledges').append(pledge)
-  }).run(connection, function(err) {
+  r.table('pledges').insert(pledge).run(connection, function(err) {
     if (err) throw err;
   });
   // Update current
